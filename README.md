@@ -14,10 +14,13 @@ Path tracing is a Monte Carlo rendering algorithm introduced by James Kajiya in 
 ## Usage
 Build and run the test suite:
 
+```bash
 make test
+```
 
 Expected output:
 
+```text
 Running tests...
 TEST 1 -- Vector Arithmetic
   PASS -- 1.1 Vector addition component sum
@@ -77,6 +80,7 @@ TEST 14 -- Background Miss Invariant
   PASS -- 14.3 Ray pointing away returns 0.0 Blue
 
 === 42 passed, 0 failed ===
+```
 
 ## Testing
 The test suite in tests.adb covers four main verification and validation categories:
@@ -90,6 +94,6 @@ The test suite in tests.adb covers four main verification and validation categor
 * Build tool: GNU Make.
 
 Command references:
-* make: Compiles tests.adb to bin/tests via GNAT project management.
-* make test: Executes the complete test harness.
-* make clean: Deletes the obj/ and bin/ directories.
+* `make`: Compiles tests.adb to bin/tests via GNAT project management.
+* `make test`: Executes the complete test harness.
+* `make clean`: Deletes the obj/ and bin/ directories.
