@@ -66,6 +66,7 @@ begin
       Zero_V : constant Vector_3D := (X => 0.0, Y => 0.0, Z => 0.0);
       Norm_Caught : Boolean := False;
       Div_Caught  : Boolean := False;
+      Quotient    : constant Vector_3D := (X => 2.0, Y => 4.0, Z => 6.0) / 2.0;
    begin
       begin
          declare
@@ -94,7 +95,7 @@ begin
       Check ("3.1 Normalizing zero vector raises Degenerate_Vector_Error", Norm_Caught);
       Check ("3.2 Division by zero raises Degenerate_Vector_Error", Div_Caught);
       Check ("3.3 Valid vector division preserves ratio",
-             ((X => 2.0, Y => 4.0, Z => 6.0) / 2.0).Y = 2.0);
+             Quotient.Y = 2.0);
    end;
 
    --  ======================================================================
@@ -305,7 +306,7 @@ begin
    end;
 
    --  ======================================================================
-   --  TEST 13 -- Scene Validation and Error Handling
+   --  TEST 13 -- Scene Validation and Invariants
    --  ======================================================================
    Put_Line ("TEST 13 -- Scene Validation and Invariants");
    declare
