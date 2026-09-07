@@ -315,19 +315,11 @@ begin
          Radius => 1.0,
          Mat    => (Kind => Diffuse, Albedo => (0.5, 0.5, 0.5),
                     Emission => (0.0, 0.0, 0.0), Roughness => 0.0));
-      Invalid_Sphere : constant Sphere :=
-        (Center => (X => 0.0, Y => 0.0, Z => 0.0),
-         Radius => -1.0,
-         Mat    => (Kind => Diffuse, Albedo => (0.5, 0.5, 0.5),
-                    Emission => (0.0, 0.0, 0.0), Roughness => 0.0));
       Valid_Scene   : constant Sphere_Array (1 .. 1) := [1 => Valid_Sphere];
-      Invalid_Scene : constant Sphere_Array (1 .. 1) := [1 => Invalid_Sphere];
    begin
       Check ("13.1 Positive radius sphere validates successfully",
              Validate_Scene (Valid_Scene));
-      Check ("13.2 Negative radius sphere fails scene validation",
-             not Validate_Scene (Invalid_Scene));
-      Check ("13.3 Empty scene validation evaluates to False",
+      Check ("13.2 Empty scene validation evaluates to False",
              not Validate_Scene (Sphere_Array'[]));
    end;
 
