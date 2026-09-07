@@ -121,7 +121,7 @@ begin
       Rad1 : constant Radiance := (R => 0.5, G => 1.2, B => 0.1);
       Rad2 : constant Radiance := (R => 0.2, G => 0.5, B => 2.0);
       Rad_Sum : constant Radiance := Rad1 + Rad2;
-      Rad_Mul : constant Radiance := Rad1 * (R => 0.5, G => 0.5, B => 0.5);
+      Rad_Mul : constant Radiance := Rad1 * Color_RGB'(R => 0.5, G => 0.5, B => 0.5);
       Color   : constant Color_RGB := To_Color (Rad1);
    begin
       Check ("5.1 Radiance addition arithmetic",
@@ -172,7 +172,7 @@ begin
          Radius => 1.0,
          Mat    => (Kind => Diffuse, Albedo => (0.0, 1.0, 0.0),
                     Emission => (0.0, 0.0, 0.0), Roughness => 0.0));
-      Scene : constant Sphere_Array (1 .. 2) := (Near_Sphere, Far_Sphere);
+      Scene : constant Sphere_Array (1 .. 2) := [Near_Sphere, Far_Sphere];
       R : constant Ray :=
         (Origin => (X => 0.0, Y => 0.0, Z => 0.0),
          Direction => (X => 0.0, Y => 0.0, Z => -1.0));
@@ -195,7 +195,7 @@ begin
          Radius => 1.0,
          Mat    => (Kind => Emissive, Albedo => (0.0, 0.0, 0.0),
                     Emission => (R => 12.0, G => 8.0, B => 4.0), Roughness => 0.0));
-      Scene : constant Sphere_Array (1 .. 1) := (1 => Light_Sphere);
+      Scene : constant Sphere_Array (1 .. 1) := [1 => Light_Sphere];
       R : constant Ray :=
         (Origin => (X => 0.0, Y => 0.0, Z => 0.0),
          Direction => (X => 0.0, Y => 0.0, Z => -1.0));
@@ -224,7 +224,7 @@ begin
          Radius => 100.0,
          Mat    => (Kind => Diffuse, Albedo => (0.8, 0.8, 0.8),
                     Emission => (0.0, 0.0, 0.0), Roughness => 0.0));
-      Scene : constant Sphere_Array (1 .. 2) := (Light_Sphere, Floor_Sphere);
+      Scene : constant Sphere_Array (1 .. 2) := [Light_Sphere, Floor_Sphere];
       R : constant Ray :=
         (Origin => (X => 0.0, Y => 1.0, Z => 0.0),
          Direction => Normalize ((X => 0.0, Y => -1.0, Z => -3.0)));
@@ -246,7 +246,7 @@ begin
          Radius => 1.0,
          Mat    => (Kind => Emissive, Albedo => (0.0, 0.0, 0.0),
                     Emission => (R => 5.0, G => 5.0, B => 5.0), Roughness => 0.0));
-      Scene : constant Sphere_Array (1 .. 1) := (1 => Light_Sphere);
+      Scene : constant Sphere_Array (1 .. 1) := [1 => Light_Sphere];
       R : constant Ray :=
         (Origin => (X => 0.0, Y => 0.0, Z => 0.0),
          Direction => (X => 0.0, Y => 0.0, Z => -1.0));
@@ -286,7 +286,7 @@ begin
          Radius => 0.5,
          Mat    => (Kind => Emissive, Albedo => (0.0, 0.0, 0.0),
                     Emission => (R => 2.0, G => 2.0, B => 2.0), Roughness => 0.0));
-      Scene : constant Sphere_Array (1 .. 1) := (1 => Emitter);
+      Scene : constant Sphere_Array (1 .. 1) := [1 => Emitter];
       R : constant Ray :=
         (Origin => (X => 0.0, Y => 0.0, Z => 0.0),
          Direction => (X => 0.0, Y => 0.0, Z => -1.0));
@@ -320,15 +320,15 @@ begin
          Radius => -1.0,
          Mat    => (Kind => Diffuse, Albedo => (0.5, 0.5, 0.5),
                     Emission => (0.0, 0.0, 0.0), Roughness => 0.0));
-      Valid_Scene   : constant Sphere_Array (1 .. 1) := (1 => Valid_Sphere);
-      Invalid_Scene : constant Sphere_Array (1 .. 1) := (1 => Invalid_Sphere);
+      Valid_Scene   : constant Sphere_Array (1 .. 1) := [1 => Valid_Sphere];
+      Invalid_Scene : constant Sphere_Array (1 .. 1) := [1 => Invalid_Sphere];
    begin
       Check ("13.1 Positive radius sphere validates successfully",
              Validate_Scene (Valid_Scene));
       Check ("13.2 Negative radius sphere fails scene validation",
              not Validate_Scene (Invalid_Scene));
       Check ("13.3 Empty scene validation evaluates to False",
-             not Validate_Scene (Sphere_Array'(1 .. 0 => Valid_Sphere)));
+             not Validate_Scene (Sphere_Array'[]));
    end;
 
    --  ======================================================================
@@ -337,10 +337,10 @@ begin
    Put_Line ("TEST 14 -- Background Miss Invariant");
    declare
       Scene : constant Sphere_Array (1 .. 1) :=
-        (1 => (Center => (X => 10.0, Y => 10.0, Z => -10.0),
+        [1 => (Center => (X => 10.0, Y => 10.0, Z => -10.0),
                Radius => 1.0,
                Mat    => (Kind => Diffuse, Albedo => (0.5, 0.5, 0.5),
-                          Emission => (1.0, 1.0, 1.0), Roughness => 0.0)));
+                          Emission => (1.0, 1.0, 1.0), Roughness => 0.0))];
       Miss_Ray : constant Ray :=
         (Origin => (X => 0.0, Y => 0.0, Z => 0.0),
          Direction => (X => 0.0, Y => 0.0, Z => 1.0));
