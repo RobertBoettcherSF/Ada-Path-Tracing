@@ -1,4 +1,3 @@
-```
 # Path Tracing in Ada 2023
 
 ## Project Overview
@@ -94,5 +93,3 @@ Command references:
 * make: Compiles tests.adb to bin/tests via GNAT project management.
 * make test: Executes the complete test harness.
 * make clean: Deletes the obj/ and bin/ directories.
-
-```
