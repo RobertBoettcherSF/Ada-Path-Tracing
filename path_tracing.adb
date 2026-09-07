@@ -351,7 +351,7 @@ package body Path_Tracing is
                              (Origin    => Hit_Rec.Point,
                               Direction => Light_Dir);
                            Shadow_Hit : constant Intersection_Record :=
-                             Intersect_Scene (Shadow_Ray, Scene, 0.001, Dist - 0.001);
+                             Intersect_Scene (Shadow_Ray, Scene, 0.001, Dist - Obj.Radius - 0.001);
                         begin
                            if not Shadow_Hit.Hit then
                               --  Visibility unoccluded, accumulate direct lighting
